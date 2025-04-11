@@ -43,7 +43,19 @@ def predict(data: PatientData):
         1: "CKD 1", 2: "CKD 2", 3: "CKD 3a",
         4: "CKD 3b", 5: "CKD 4", 6: "CKD 5"
     }
+    conseils_dict = {
+        1: "⚠️ Surveillance régulière et contrôle de la tension artérielle. Éviter les médicaments néphrotoxiques.",
+        2: "🥦 Maintenir une bonne hygiène de vie : alimentation pauvre en sel et protéines, éviter le tabac.",
+        3: "💊 Suivi spécialisé recommandé. Adapter le traitement de l’HTA, surveiller la protéinurie.",
+        4: "🩺 Préparer la prise en charge néphrologique. Discussion possible sur la dialyse à moyen terme.",
+        5: "🚨 Stade terminal. Planification de la dialyse ou d'une greffe. Suivi rapproché par néphrologue.",
+        6: "🏥 Stade très avancé. Prise en charge en hôpital ou dialyse. Soutien psychologique et nutritionnel."
+    }
+
+    stade_label = stade_dict.get(prediction, 'inconnu')
+    conseil = conseils_dict.get(prediction, "Aucun conseil disponible pour ce stade.")
 
     return {
-        "result": f"Le patient est au stade de l'IRC {stade_dict.get(prediction, 'inconnu')}"
+        "result": f"Le patient est au stade de l'IRC {stade_label}",
+        "conseil": conseil
     }
